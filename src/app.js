@@ -14,4 +14,5 @@ document.addEventListener('DOMContentLoaded', () => {
   const selectElement = document.querySelector('#select-view');
   const selectedInfoView = new SelectedInfoView(selectElement);
   selectedInfoView.bindEvents();
+
 });

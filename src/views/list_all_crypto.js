@@ -11,7 +11,6 @@ ListAllCrypto.prototype.bindEvents = function(){
   });
   this.element.addEventListener('change', (evt) => {
     const cryptoIndex = evt.target.value;
-    console.log(evt);
     PubSub.publish('crypto:selected-info', cryptoIndex);
   });
 };
@@ -19,10 +18,21 @@ ListAllCrypto.prototype.bindEvents = function(){
 ListAllCrypto.prototype.render = function(cryptoInfo){
   this.element.innerHTML = '';
   cryptoInfo.forEach( (crypto) => {
-    const list = document.createElement('div');
-    // li.textContent = crypto.name;
-    list.value = crypto.id;
-    this.element.appendChild(list);
+    const row = document.createElement('tr');
+
+    const rowRank = document.createElement('td');
+    rowRank.textContent = crypto.rank;
+    row.appendChild(rowRank);
+
+    const rowName = document.createElement('td');
+    rowName.textContent = crypto.name;
+    row.appendChild(rowName);
+
+    const rowPrice = document.createElement('td');
+    rowPrice.textContent = crypto.price;
+    row.appendChild(rowPrice);
+
+    this.element.appendChild(row);
   });
 };
 
