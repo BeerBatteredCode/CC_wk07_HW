@@ -1,4 +1,5 @@
 const Crypto = require('./models/crypto.js');
+const ListAllCrypto = require('./views/list_all_crypto.js');
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -8,4 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const listElement = document.querySelector('#list-view');
   const listAllCrypto = new ListAllCrypto(listElement);
   listAllCrypto.bindEvents();
+
+  const selectElement = document.querySelector('#select-view');
+  const selectedInfoView = new SelectedInfoView(selectElement);
+  selectedInfoView.bindEvents();
 });

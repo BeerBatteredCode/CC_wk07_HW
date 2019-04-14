@@ -78,7 +78,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const Crypto = __webpack_require__(/*! ./models/crypto.js */ \"./src/models/crypto.js\");\n\ndocument.addEventListener('DOMContentLoaded', () => {\n\n  const crypto = new Crypto;\n  crypto.bindEvents();\n\n  const listElement = document.querySelector('#list-view');\n  const listAllCrypto = new ListAllCrypto(listElement);\n  listAllCrypto.bindEvents();\n});\n\n\n//# sourceURL=webpack:///./src/app.js?");
+eval("const Crypto = __webpack_require__(/*! ./models/crypto.js */ \"./src/models/crypto.js\");\nconst ListAllCrypto = __webpack_require__(/*! ./views/list_all_crypto.js */ \"./src/views/list_all_crypto.js\");\n\ndocument.addEventListener('DOMContentLoaded', () => {\n\n  const crypto = new Crypto;\n  crypto.bindEvents();\n\n  const listElement = document.querySelector('#list-view');\n  const listAllCrypto = new ListAllCrypto(listElement);\n  listAllCrypto.bindEvents();\n\n  const selectElement = document.querySelector('#select-view');\n  const selectedInfoView = new SelectedInfoView(selectElement);\n  selectedInfoView.bindEvents();\n});\n\n\n//# sourceURL=webpack:///./src/app.js?");
 
 /***/ }),
 
@@ -112,6 +112,17 @@ eval("const RequestHelper = function (url) {\n  this.url = url\n};\n\nRequestHel
 /***/ (function(module, exports, __webpack_require__) {
 
 eval("const RequestHelper = __webpack_require__(/*! ../helpers/request_helper.js */ \"./src/helpers/request_helper.js\");\nconst PubSub = __webpack_require__(/*! ../helpers/pub_sub.js */ \"./src/helpers/pub_sub.js\");\n\nconst Crypto = function(){\n  this.data = null;\n};\n\nCrypto.prototype.bindEvents = function(){\n  this.getData();\n\n  PubSub.subscribe('crypto:selected-info', (evt) => {\n    const cryptoIndex = parseInt(evt.detail, 10);\n    const crypto = this.data[cryptoIndex];\n    PubSub.publish('crypto:display-info', crypto);\n  });\n};\n\nCrypto.prototype.getData = function(){\n  const url = 'https://api.coinranking.com/v1/public/coins';\n  const request = new RequestHelper(url);\n  request.get()\n    .then((crypto) => {\n      this.data = data.map( (crypto, index) => {\n        crypto.id = index;\n        return crypto;\n      });\n    PubSub.publish('crypto:all-info', this.data);\n  })\n  .catch( (err) => {\n    PubSub.publish('crypto-api-error', err);\n  });\n};\n\nmodule.exports = Crypto;\n\n\n//# sourceURL=webpack:///./src/models/crypto.js?");
+
+/***/ }),
+
+/***/ "./src/views/list_all_crypto.js":
+/*!**************************************!*\
+  !*** ./src/views/list_all_crypto.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("const PubSub = __webpack_require__(/*! ../helpers/pub_sub.js */ \"./src/helpers/pub_sub.js\");\n\nconst ListAllCrypto = function(element){\n  this.element = element;\n};\n\nListAllCrypto.prototype.bindEvents = function(){\n  PubSub.subscribe('crypto:all-info', (evt) => {\n    const cryptoInfo = evt.detail;\n    this.render(cryptoInfo);\n    console.log(cryptoInfo);\n  });\n  this.element.addEventListener('change', (evt) => {\n    const cryptoIndex = evt.target.value;\n    console.log(evt);\n    PubSub.publish('crypto:selected-info', cryptoIndex);\n  });\n};\n\nListAllCrypto.prototype.render = function(cryptoInfo){\n  this.element.innerHTML = '';\n  cryptoInfo.forEach( (crypto) => {\n    const li = document.createElement('li');\n    li.textContent = crypto.name;\n    li.value = crypto.id;\n    this.element.appendChild(li);\n  });\n};\n\nmodule.exports = ListAllCrypto;\n\n\n//# sourceURL=webpack:///./src/views/list_all_crypto.js?");
 
 /***/ })
 
