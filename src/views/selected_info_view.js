@@ -5,13 +5,13 @@ const SelectedInfoView = function(element){
 };
 
 SelectedInfoView.prototype.bindEvents = function(){
-  PubSub.subscribe('crypto:display-info', (evt) = {
+  PubSub.subscribe('crypto:display-info', (evt) => {
     this.render(evt.detail);
   });
 };
 
 SelectedInfoView.prototype.render = function(crypto){
-  this.elemen.innerHTML = '';
+  this.element.innerHTML = '';
 
   const cryptoContent = document.createElement('div')
 
@@ -22,6 +22,8 @@ SelectedInfoView.prototype.render = function(crypto){
       <li>${crypto.change}</li>
     </ul>
   `;
-}
+
+  this.element.appendChild(cryptoContent);
+};
 
 module.exports = SelectedInfoView;

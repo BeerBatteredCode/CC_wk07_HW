@@ -1,5 +1,6 @@
 const Crypto = require('./models/crypto.js');
 const ListAllCrypto = require('./views/list_all_crypto.js');
+const SelectedInfoView = require('./views/selected_info_view.js');
 
 document.addEventListener('DOMContentLoaded', () => {
 

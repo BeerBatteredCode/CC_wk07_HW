@@ -8,7 +8,6 @@ ListAllCrypto.prototype.bindEvents = function(){
   PubSub.subscribe('crypto:all-info', (evt) => {
     const cryptoInfo = evt.detail;
     this.render(cryptoInfo);
-    console.log(cryptoInfo);
   });
   this.element.addEventListener('change', (evt) => {
     const cryptoIndex = evt.target.value;

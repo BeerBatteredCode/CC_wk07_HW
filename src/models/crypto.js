@@ -6,6 +6,7 @@ const Crypto = function(){
 };
 
 Crypto.prototype.bindEvents = function(){
+
   this.getData();
 
   PubSub.subscribe('crypto:selected-info', (evt) => {
@@ -23,6 +24,7 @@ Crypto.prototype.getData = function(){
       this.data = data.map( (crypto, index) => {
         crypto.id = index;
         return crypto;
+        console.log(crypto)
       });
     PubSub.publish('crypto:all-info', this.data);
   })
