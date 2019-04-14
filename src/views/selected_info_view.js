@@ -13,15 +13,15 @@ SelectedInfoView.prototype.bindEvents = function(){
 SelectedInfoView.prototype.render = function(crypto){
   this.element.innerHTML = '';
 
-  const cryptoContent = document.createElement('div')
-
-  cryptoContent.innerHTML = `
-    <ul>
-      <li>${crypto.name}</li>
-      <li>${crypto.price}</li>
-      <li>${crypto.change}</li>
-    </ul>
-  `;
+  // const cryptoContent = document.createElement('div')
+  //
+  // cryptoContent.innerHTML = `
+  //   <ul>
+  //     <li>${crypto.name}</li>
+  //     <li>${crypto.price}</li>
+  //     <li>${crypto.change}</li>
+  //   </ul>
+  // `;
 
   this.element.appendChild(cryptoContent);
 };

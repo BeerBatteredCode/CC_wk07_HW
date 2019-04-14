@@ -3,6 +3,7 @@ const PubSub = require('../helpers/pub_sub.js');
 
 const Crypto = function(){
   this.data = null;
+  this.dropdown = null;
 };
 
 Crypto.prototype.bindEvents = function(){
@@ -10,9 +11,8 @@ Crypto.prototype.bindEvents = function(){
   this.getData();
 
   PubSub.subscribe('crypto:selected-info', (evt) => {
-    // const cryptoIndex = parseInt(evt.detail, 10);
-    const crypto = this.data[cryptoIndex];
-    PubSub.publish('crypto:display-info', crypto);
+    const dropdown = this.dropdown;
+    PubSub.publish('crypto:display-info', dropdown);
   });
 };
 

@@ -16,9 +16,10 @@ ListAllCrypto.prototype.bindEvents = function(){
 };
 
 ListAllCrypto.prototype.render = function(cryptoInfo){
-  this.element.innerHTML = '';
+  // this.element.innerHTML = '';
   cryptoInfo.forEach( (crypto) => {
     const row = document.createElement('tr');
+    row.innerHTML = '';
 
     const rowRank = document.createElement('td');
     rowRank.textContent = crypto.rank;
