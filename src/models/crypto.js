@@ -20,16 +20,16 @@ Crypto.prototype.getData = function(){
   const url = 'https://api.coinranking.com/v1/public/coins';
   const request = new RequestHelper(url);
   request.get()
+  console.log(crypto)
     .then((crypto) => {
-      this.data = data.map( (crypto, index) => {
+      this.data = data.data.coins.map( (crypto, index) => {
         crypto.id = index;
         return crypto;
-        console.log(crypto)
       });
     PubSub.publish('crypto:all-info', this.data);
   })
   .catch( (err) => {
-    PubSub.publish('crypto-api-error', err);
+    PubSub.publish('crypto:api-error', err);
   });
 };
 

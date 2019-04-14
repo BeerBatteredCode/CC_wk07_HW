@@ -19,10 +19,10 @@ ListAllCrypto.prototype.bindEvents = function(){
 ListAllCrypto.prototype.render = function(cryptoInfo){
   this.element.innerHTML = '';
   cryptoInfo.forEach( (crypto) => {
-    const li = document.createElement('li');
-    li.textContent = crypto.name;
-    li.value = crypto.id;
-    this.element.appendChild(li);
+    const list = document.createElement('div');
+    // li.textContent = crypto.name;
+    list.value = crypto.id;
+    this.element.appendChild(list);
   });
 };
 
