@@ -12,7 +12,7 @@ Crypto.prototype.bindEvents = function(){
     const cryptoIndex = parseInt(evt.detail, 10);
     const crypto = this.data[cryptoIndex];
     PubSub.publish('crypto:display-info', crypto);
-  })
+  });
 };
 
 Crypto.prototype.getData = function(){
